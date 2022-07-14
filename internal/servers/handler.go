@@ -2,6 +2,7 @@ package servers
 
 import (
 	"context"
+	"fmt"
 	"launchbackend/eu.suro/launch/protos/server"
 	"launchbackend/eu.suro/launch/protos/web"
 	"launchbackend/internal/handlers"
@@ -31,6 +32,7 @@ func (h *handler) Register(router *gin.Engine) {
 func (h *handler) getServers(ctx *gin.Context) {
 	servers, err := h.serverClient.ListServers(context.TODO(), &server.Empty{})
 	if err != nil {
+		fmt.Println(err)
 		ctx.JSON(500, err)
 		return
 	}
